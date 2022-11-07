@@ -1,6 +1,6 @@
 name: getx_csv_translation
 description: Annotations for the getx_csv_translation_generator package.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/Revitate/getx_csv_translation
 
 environment:
