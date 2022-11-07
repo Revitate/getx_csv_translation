@@ -8,7 +8,7 @@ import 'format.dart';
 
 runBuild(
   String? csvPath,
-  String? _targetPath,
+  String? targetPath,
 ) async {
   File f = File(csvPath ?? './translations.csv');
   if (!f.existsSync()) {
@@ -19,11 +19,11 @@ runBuild(
   stdout.writeln('Building...');
   final keys = await genKeysFromCSV(f);
 
-  final targetPath = _targetPath ?? './lib/translations.dart';
-  final targetFileName = basenameWithoutExtension(targetPath);
+  final ensureTargetPath = targetPath ?? './lib/translations.dart';
+  final targetFileName = basenameWithoutExtension(ensureTargetPath);
   final generatedFileName = '$targetFileName.g.dart';
 
-  File genFile = File(join(dirname(targetPath), generatedFileName));
+  File genFile = File(join(dirname(ensureTargetPath), generatedFileName));
   final content = '''// GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of '$targetFileName.dart';

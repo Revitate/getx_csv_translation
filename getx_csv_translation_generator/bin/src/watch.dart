@@ -1,20 +1,16 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:getx_csv_translation_generator/keys.dart';
-import 'package:path/path.dart';
 import 'package:watcher/watcher.dart';
 
 import 'build.dart';
-import 'format.dart';
 
 runWatch(
-  String? _csvPath,
-  String? _targetPath,
+  String? csvPath,
+  String? targetPath,
 ) async {
-  final csvPath = _csvPath ?? './translations.csv';
+  final ensureCsvPath = csvPath ?? './translations.csv';
 
-  final targetPath = _targetPath ?? './lib/translations.dart';
+  final ensureTargetPath = targetPath ?? './lib/translations.dart';
 
   try {
     await runBuild(csvPath, targetPath);
@@ -23,7 +19,7 @@ runWatch(
   }
 
   // watch pubspec.yaml
-  FileWatcher watcher = FileWatcher(csvPath);
+  FileWatcher watcher = FileWatcher(ensureCsvPath);
   watcher.events.listen((event) async {
     switch (event.type) {
       case ChangeType.ADD:
@@ -31,7 +27,7 @@ runWatch(
         break;
       case ChangeType.MODIFY:
         try {
-          await runBuild(csvPath, targetPath);
+          await runBuild(ensureCsvPath, ensureTargetPath);
         } catch (e) {
           stdout.writeln(e);
         }

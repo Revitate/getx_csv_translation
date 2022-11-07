@@ -38,7 +38,7 @@ class GetXCSVTranslationGenerator
       final keys = await genKeysFromCSV(csvInput);
 
       return """const \$keys = ${json.encode(keys)};""";
-    } on ParseError catch (e) {
+    } on ParseError catch (_) {
       throw InvalidGenerationSourceError(
         'Generator cannot find csv file `$csvPath`.',
         todo: 'Check path of `$csvPath`.',

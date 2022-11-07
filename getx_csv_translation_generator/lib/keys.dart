@@ -37,7 +37,7 @@ genKeysFromCSV(File csvFile) async {
   final data = csv
       .sublist(1)
       .cast<List>()
-      .takeWhile((x) => x.length > 0)
+      .takeWhile((x) => x.isNotEmpty)
       .toList();
 
   if (headers[0] != "key") {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getx_csv_translation/getx_csv_translation.dart';
 
 void main() {
   runApp(const MyApp());
