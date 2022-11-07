@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      getx_csv_translation_generator|getx_csv_translation:
+        enabled: true
+
+builders:
+  getx_csv_translation:
+    target: ":getx_csv_translation_generator"
+    import: "package:getx_csv_translation/builder.dart"
+    builder_factories: ["getXTranslationBuilder"]
+    build_extensions: {".dart": ["getx_csv_translation.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
