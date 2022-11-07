@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      getx_csv_translation_generator|getx_csv_translation:
+        options:
+          # The default value for each is listed.
+          csv_path: ./translations.csv

@@ -1,8 +1,7 @@
 name: getx_csv_translation
-description: A new Flutter package project.
+description: Annotations for the getx_csv_translation_generator package.
 version: 0.0.1
 homepage: https://github.com/Revitate/getx_csv_translation
-publish_to: 'none'
 
 environment:
   sdk: '>=2.18.4 <3.0.0'

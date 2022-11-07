@@ -7,9 +7,12 @@ targets:
 builders:
   getx_csv_translation:
     target: ":getx_csv_translation_generator"
-    import: "package:getx_csv_translation/builder.dart"
+    import: "package:getx_csv_translation_generator/builder.dart"
     builder_factories: ["getXTranslationBuilder"]
     build_extensions: {".dart": ["getx_csv_translation.g.part"]}
-    auto_apply: dependents
+    auto_apply: all_packages
     build_to: cache
     applies_builders: ["source_gen|combining_builder"]
+    defaults:
+      options:
+        csv_path: ./translations.csv

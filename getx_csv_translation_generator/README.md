@@ -11,29 +11,82 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+[GetX](https://pub.dev/packages/get#internationalization) Translation code generator from CSV.
 
-## Features
+## Install
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Add the following to your pubspec.yaml:
 
-## Getting started
+```
+dependencies:
+  getx_csv_translation: <latest>
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+dev_dependencies:
+  build_runner: <latest>
+  getx_csv_translation_generator: <latest>
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+1. Create `translations.csv` ([example](./example/translations.csv))
+
+| key   | en_US      | th_TH       | \<locale>      |
+| ----- | ---------- | ----------- | -------------- |
+| test  | test       | ทดสอบ       | \<translation> |
+| param | test @name | ทดสอบ @name | ...            |
+
+2. Create `lib/translations.dart`
 
 ```dart
-const like = 'sample';
+import 'package:getx_csv_translation/getx_csv_translation.dart';
+import 'package:get/get.dart';
+
+part 'translations.g.dart';
+
+@GetXCSVTranslation()
+class GetXCSVTranslations extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => $keys;
+}
 ```
 
-## Additional information
+3. Generate translations
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+   3.1 with `build_runner`
+
+```
+flutter packages pub run build_runner build
+```
+
+3.2 with CLI
+
+```
+flutter pub run getx_csv_translation_generator build --csvPath <path to translation(optional)> --targetPath <path to translations.dart(optional)>
+```
+
+```
+flutter pub run getx_csv_translation_generator watch --csvPath <path to translation(optional)> --targetPath <path to translations.dart(optional)>
+```
+
+4. Configure GetX app
+
+```dart
+return GetMaterialApp(
+    translations: GetXCSVTranslations(), // your translations
+    ...
+);
+```
+
+## Build Configuraion
+
+Aside from setting arguments on the associated annotation classes, you can also configure code generation by setting values in build.yaml.
+
+```
+targets:
+  $default:
+    builders:
+      getx_csv_translation_generator|getx_csv_translation:
+        options:
+          # The default value for each is listed.
+          csv_path: ./translation.csv
+```
