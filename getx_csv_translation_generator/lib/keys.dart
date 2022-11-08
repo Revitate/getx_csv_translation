@@ -26,10 +26,12 @@ genKeysFromCSV(File csvFile) async {
   final csv = await csvInput
       .transform(utf8.decoder)
       .transform(const CsvToListConverter(
-          shouldParseNumbers: false,
-          csvSettingsDetector: FirstOccurrenceSettingsDetector(
-            eols: ['\r\n', '\n'],
-          )))
+        shouldParseNumbers: false,
+        csvSettingsDetector: FirstOccurrenceSettingsDetector(
+          eols: ['\r\n', '\n'],
+        ),
+        textDelimiter: ';:;',
+      ))
       .toList();
 
   final headers = csv[0]
@@ -40,7 +42,7 @@ genKeysFromCSV(File csvFile) async {
   final data =
       csv.sublist(1).cast<List>().takeWhile((x) => x.isNotEmpty).toList();
 
-  if (headers[0] != "key") {
+  if (headers[0] != 'key') {
     throw ParseError(
       'Generator cannot parse',
     );

@@ -89,4 +89,5 @@ targets:
         options:
           # The default value for each is listed.
           csv_path: ./translation.csv
+          single_quote: true
 ```

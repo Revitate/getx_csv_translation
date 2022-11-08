@@ -37,8 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
-  getx_csv_translation:
-    path: ../../getx_csv_translation
+  getx_csv_translation: ^0.0.2
   
 
 dev_dependencies:

@@ -6,8 +6,9 @@ import 'build.dart';
 
 runWatch(
   String? csvPath,
-  String? targetPath,
-) async {
+  String? targetPath, {
+  bool? singleQuote,
+}) async {
   final ensureCsvPath = csvPath ?? './translations.csv';
 
   final ensureTargetPath = targetPath ?? './lib/translations.dart';
@@ -27,7 +28,11 @@ runWatch(
         break;
       case ChangeType.MODIFY:
         try {
-          await runBuild(ensureCsvPath, ensureTargetPath);
+          await runBuild(
+            ensureCsvPath,
+            ensureTargetPath,
+            singleQuote: singleQuote,
+          );
         } catch (e) {
           stdout.writeln(e);
         }

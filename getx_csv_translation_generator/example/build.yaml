@@ -5,3 +5,4 @@ targets:
         options:
           # The default value for each is listed.
           csv_path: ./translations.csv
+          single_quote: true

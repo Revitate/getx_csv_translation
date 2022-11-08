@@ -7,6 +7,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:getx_csv_translation/getx_csv_translation.dart';
 import 'package:getx_csv_translation_generator/keys.dart';
+import 'package:getx_csv_translation_generator/utils.dart';
 import 'package:source_gen/source_gen.dart';
 
 class GetXCSVTranslationGenerator
@@ -36,8 +37,13 @@ class GetXCSVTranslationGenerator
     }
     try {
       final keys = await genKeysFromCSV(csvInput);
+      var jsonData = json.encode(keys);
+      final singleQuote = options.config['single_quote'] ?? true;
+      if (singleQuote) {
+        jsonData = formatSingleQuote(jsonData);
+      }
 
-      return """const \$keys = ${json.encode(keys)};""";
+      return '''const \$keys = $jsonData;''';
     } on ParseError catch (_) {
       throw InvalidGenerationSourceError(
         'Generator cannot find csv file `$csvPath`.',

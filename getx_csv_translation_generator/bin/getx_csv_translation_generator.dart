@@ -12,17 +12,27 @@ void main(List<String> arguments) {
       'build',
       ArgParser()
         ..addOption('csvPath')
-        ..addOption('targetPath'));
+        ..addOption('targetPath')
+        ..addOption('singleQuote', defaultsTo: 'true'));
   parser.addCommand(
       'watch',
       ArgParser()
         ..addOption('csvPath')
-        ..addOption('targetPath'));
+        ..addOption('targetPath')
+        ..addOption('singleQuote', defaultsTo: 'true'));
 
   ArgResults results = parser.parse(arguments);
   if (results.command?.name == 'build') {
-    runBuild(results.command?['csvPath'], results.command?['targetPath']);
+    runBuild(
+      results.command?['csvPath'],
+      results.command?['targetPath'],
+      singleQuote: results.command?['singleQuote'] == 'true',
+    );
   } else if (results.command?.name == 'watch') {
-    runWatch(results.command?['csvPath'], results.command?['targetPath']);
+    runWatch(
+      results.command?['csvPath'],
+      results.command?['targetPath'],
+      singleQuote: results.command?['singleQuote'] == 'true',
+    );
   }
 }
