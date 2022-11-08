@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:csv/csv.dart';
+import 'package:csv/csv_settings_autodetection.dart';
 
 class ParseError extends Error {
   final String message;
@@ -25,8 +26,10 @@ genKeysFromCSV(File csvFile) async {
   final csv = await csvInput
       .transform(utf8.decoder)
       .transform(const CsvToListConverter(
-        shouldParseNumbers: false,
-      ))
+          shouldParseNumbers: false,
+          csvSettingsDetector: FirstOccurrenceSettingsDetector(
+            eols: ['\r\n', '\n'],
+          )))
       .toList();
 
   final headers = csv[0]
@@ -34,11 +37,8 @@ genKeysFromCSV(File csvFile) async {
       .map(_uniformizeKey)
       .takeWhile((x) => x.isNotEmpty)
       .toList();
-  final data = csv
-      .sublist(1)
-      .cast<List>()
-      .takeWhile((x) => x.isNotEmpty)
-      .toList();
+  final data =
+      csv.sublist(1).cast<List>().takeWhile((x) => x.isNotEmpty).toList();
 
   if (headers[0] != "key") {
     throw ParseError(
