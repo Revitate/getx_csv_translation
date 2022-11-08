@@ -30,7 +30,7 @@ dev_dependencies:
 
 ## Usage
 
-1. Create `translations.csv` ([example](./example/translations.csv))
+1. Create `translations.csv` ([example](./getx_csv_translation_generator/example/translations.csv))
 
 | key   | en_US      | th_TH       | \<locale>      |
 | ----- | ---------- | ----------- | -------------- |
