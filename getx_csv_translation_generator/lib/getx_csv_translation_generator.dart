@@ -37,7 +37,7 @@ class GetXCSVTranslationGenerator
     }
     try {
       final keys = await genKeysFromCSV(csvInput);
-      var jsonData = json.encode(keys);
+      var jsonData = json.encode(keys).replaceAll('\\\\n', '\\n');
       final singleQuote = options.config['single_quote'] ?? true;
       if (singleQuote) {
         jsonData = formatSingleQuote(jsonData);
