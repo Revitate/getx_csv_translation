@@ -30,7 +30,6 @@ genKeysFromCSV(File csvFile) async {
         csvSettingsDetector: FirstOccurrenceSettingsDetector(
           eols: ['\r\n', '\n'],
         ),
-        textDelimiter: ';:;',
       ))
       .toList();
 
