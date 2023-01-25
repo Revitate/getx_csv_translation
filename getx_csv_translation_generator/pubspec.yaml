@@ -1,6 +1,6 @@
 name: getx_csv_translation_generator
 description: GetX Translation code generator from CSV.
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/Revitate/getx_csv_translation
 
 environment:
