@@ -4,25 +4,26 @@ version: 0.0.6
 homepage: https://github.com/Revitate/getx_csv_translation
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
+  sdk: '>=2.18.4 <4.0.0'
   flutter: '>=1.17.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  build: ^2.3.1
-  source_gen: ^1.0.0
-  csv: ^5.0.1
-  path: ^1.8.2
-  watcher: ^1.0.2
-  dart_style: ^2.2.4
-  args: ^2.3.1
-  getx_csv_translation: ^0.0.1
+  build: ^2.4.1
+  source_gen: ^1.5.0
+  csv: ^5.1.1
+  path: ^1.8.3
+  watcher: ^1.1.0
+  dart_style: ^2.3.4
+  args: ^2.4.2
+  analyzer: ^6.2.0
+  getx_csv_translation: ^0.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
