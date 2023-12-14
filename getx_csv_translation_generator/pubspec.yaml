@@ -1,11 +1,11 @@
 name: getx_csv_translation_generator
 description: GetX Translation code generator from CSV.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/Revitate/getx_csv_translation
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
-  flutter: ">=1.17.0"
+  flutter: '>=1.17.0'
 
 dependencies:
   flutter:
@@ -17,14 +17,12 @@ dependencies:
   watcher: ^1.0.2
   dart_style: ^2.2.4
   args: ^2.3.1
-  analyzer: ^5.2.0
   getx_csv_translation: ^0.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

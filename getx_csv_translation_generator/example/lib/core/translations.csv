@@ -1,0 +1,4 @@
+key,en,th
+test,Te\nst,ทด\nสอบ
+test2,"Te,nst","ทด,สอบ"
+test3,"""Tenst""","""ทดสอบ"""

@@ -24,7 +24,7 @@ part 'translations.g.dart';
 
 @GetXCSVTranslation()
 class GetXCSVTranslations extends Translations {
-
   @override
   Map<String, Map<String, String>> get keys => $keys;
+}
 ```

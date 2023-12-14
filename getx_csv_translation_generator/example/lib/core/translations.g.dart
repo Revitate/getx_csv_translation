@@ -7,6 +7,6 @@ part of 'translations.dart';
 // **************************************************************************
 
 const $keys = {
-  "en": {"test": "Test"},
-  "th": {"test": "ทดสอบ"}
+  'en': {'test': 'Te\nst', 'test2': 'Te,nst', 'test3': '"Tenst"'},
+  'th': {'test': 'ทด\nสอบ', 'test2': 'ทด,สอบ', 'test3': '"ทดสอบ"'}
 };
