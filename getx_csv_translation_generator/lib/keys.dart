@@ -86,9 +86,9 @@ String genClassFromKeys(Map<String, Map<String, String>>? keys) {
     return '';
   }
 
-  var keysMap = keys.isEmpty ? null : keys.entries.first.value;
+  var keysMap = keys.isEmpty ? {} : keys.entries.first.value;
 
-  if (keysMap == null || keysMap.isEmpty) {
+  if (keysMap.isEmpty) {
     return '';
   }
 
@@ -114,7 +114,7 @@ String genClassFromKeys(Map<String, Map<String, String>>? keys) {
       String params = '';
       for (var result in results) {
         variable += 'required String $result,\n';
-        params += '\'$result\': \'$result\',\n';
+        params += '\'$result\': $result,\n';
       }
       localization += '''  static String $name({
     $variable

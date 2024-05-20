@@ -42,8 +42,8 @@ class GetXCSVTranslationGenerator
       if (singleQuote) {
         jsonData = formatSingleQuote(jsonData);
       }
-      
-      String localization = genClassFromKeys(keys);;
+
+      String localization = genClassFromKeys(keys);
 
       return '''const \$keys = $jsonData;\n\n$localization''';
     } on ParseError catch (_) {
