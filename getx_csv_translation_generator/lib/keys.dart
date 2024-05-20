@@ -90,7 +90,7 @@ String genClassFromKeys(Map<String, String> keysMap) {
       name = keyName.first;
       keyName.removeAt(0);
       for (var element in keyName) {
-        name += element.capitalize();
+        name += element._capitalize();
       }
     }
     var matches = RegExp(r'@(\w+)').allMatches(value);
@@ -119,7 +119,7 @@ String genClassFromKeys(Map<String, String> keysMap) {
 }
 
 extension on String {
-  String capitalize() {
+  String _capitalize() {
     return "${this[0].toUpperCase()}${substring(1)}";
   }
 }
