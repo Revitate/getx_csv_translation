@@ -79,6 +79,69 @@ return GetMaterialApp(
 );
 ```
 
+## How to use AppLocalization class
+
+The `AppLocalization` class provides static getter methods for accessing the translations. For example, `AppLocalization.test` returns the translation for the key `'test'`. Similarly, `AppLocalization.test2` returns the translation for the key `'test2'`. The class also includes a static method named `test4DialogDescription` that takes two required parameters (`value` and `coins`) and returns a translation based on those parameters.
+
+Overall, this code represents a localization mechanism where translations for different languages are stored in a map, and the `AppLocalization` class provides convenient methods to access those translations.
+
+```dart
+
+const $keys = {
+  'en': {
+    'test': 'Te\nst',
+    'test2': 'Te,nst',
+    'test3': '"Tenst"',
+    'test4.dialog.title.makeText': '"Test Text, "',
+    'test4.dialog.description': '"(@value) make more money @coins "'
+  },
+  'th': {
+    'test': 'ทด\nสอบ',
+    'test2': 'ทด,สอบ',
+    'test3': '"ทดสอบ"',
+    'test4.dialog.title.makeText': '"ทดสอบ ข้อความ, "',
+    'test4.dialog.description': '"(@value) ทำเงินเพิ่มขึ้น @coins "'
+  }
+};
+
+class AppLocalization {
+  static String get test => Translations.test;
+  static String get test2 => Translations.test2;
+  static String get test3 => Translations.test3;
+  static String get test4DialogTitleMakeText => Translations.test4DialogTitleMakeText;
+  static String test4DialogDescription({
+    required String value,
+    required String coins,
+  }) =>
+      'test4.dialog.description'.tr.trParams({
+        'value': value,
+        'coins': coins,
+      });
+}
+```
+
+### Example use class AppLocalization
+
+1. Import the AppLocalization class in the file where you want to use it:
+``` dart
+import 'path_to_your_file/translations.dart';
+```
+
+2. Use the static getters of the AppLocalization class to get the translated strings:
+``` dart
+String testTranslation = AppLocalization.test;
+String test2Translation = AppLocalization.test2;
+```
+
+3. If you have dynamic translations that require parameters, you can pass them as arguments:
+``` dart
+String dialogDescription = AppLocalization.test4DialogDescription(
+  value: '100',
+  coins: '50',
+);
+```
+This will return the translation for 'test4.dialog.description' with 'value' and 'coins' replaced by '100' and '50', respectively.
+
 ## Build Configuraion
 
 Aside from setting arguments on the associated annotation classes, you can also configure code generation by setting values in build.yaml.
