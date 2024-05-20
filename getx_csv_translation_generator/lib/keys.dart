@@ -114,7 +114,7 @@ String genClassFromKeys(Map<String, Map<String, String>>? keys) {
       String params = '';
       for (var result in results) {
         variable += 'required String $result,\n';
-        params += "'$result': '$result',\n";
+        params += '\'$result\': \'$result\',\n';
       }
       localization += '''  static String $name({
     $variable
@@ -136,5 +136,5 @@ String _capitalize(String value) {
 
   if (value.length == 1) return value.toUpperCase();
 
-  return "${value[0].toUpperCase()}${value.substring(1)}";
+  return '${value[0].toUpperCase()}${value.substring(1)}';
 }
