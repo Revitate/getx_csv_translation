@@ -42,13 +42,10 @@ class GetXCSVTranslationGenerator
       if (singleQuote) {
         jsonData = formatSingleQuote(jsonData);
       }
-      Map<String, String> keysMap = keys['en'];
-      final String localization = genClassFromKeys(keysMap);
+      
+      String localization = genClassFromKeys(keys);;
 
-      return '''const \$keys = $jsonData;
-
-                $localization
-                ''';
+      return '''const \$keys = $jsonData;\n\n$localization''';
     } on ParseError catch (_) {
       throw InvalidGenerationSourceError(
         'Generator cannot find csv file `$csvPath`.',

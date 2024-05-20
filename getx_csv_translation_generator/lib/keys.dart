@@ -81,14 +81,26 @@ String _uniformizeKey(String key) {
   return key;
 }
 
-String genClassFromKeys(Map<String, String> keysMap) {
+String genClassFromKeys(Map<String, Map<String, String>>? keys) {
+
+  if (keys == null) {
+    return '';
+  }
+
+  var keysMap = keys.isEmpty ? null : keys.entries.first.value;
+
+  if (keysMap == null || keysMap.isEmpty) {
+    return '';
+  }
+
   String localization = '';
   keysMap.forEach((key, value) {
-    List<String> keyName = key.split(RegExp(r'[.-_]'));
+    List<String> keyName = key.split(RegExp(r'[._-]'));
     String name = '';
     if (keyName.isNotEmpty) {
       name = keyName.first;
       keyName.removeAt(0);
+
       for (var element in keyName) {
         name += element._capitalize();
       }
@@ -102,24 +114,30 @@ String genClassFromKeys(Map<String, String> keysMap) {
       String variable = '';
       String params = '';
       for (var result in results) {
-        variable += 'required String $result, ';
-        params += "'$result': '$result',";
+        variable += 'required String $result,\n';
+        params += "'$result': '$result',\n";
       }
-      localization +=
-          '''  static String $name({$variable}) => '$key'.tr.trParams(
-        {$params},
-      );\n''';
+      localization += '''  static String $name({
+    $variable
+  }) => '$key'.tr.trParams({
+    $params
+  });\n''';
     }
   });
-  return '''
-  class AppLocalization{
-    $localization
-  }
-  ''';
+  return '''class AppLocalization {
+  $localization
+}
+''';
 }
 
 extension on String {
   String _capitalize() {
+    if (isEmpty) {
+      return this;
+    }
+
+    if (length == 1) return toUpperCase();
+
     return "${this[0].toUpperCase()}${substring(1)}";
   }
 }
