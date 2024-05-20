@@ -82,7 +82,6 @@ String _uniformizeKey(String key) {
 }
 
 String genClassFromKeys(Map<String, Map<String, String>>? keys) {
-
   if (keys == null) {
     return '';
   }
@@ -102,7 +101,7 @@ String genClassFromKeys(Map<String, Map<String, String>>? keys) {
       keyName.removeAt(0);
 
       for (var element in keyName) {
-        name += element._capitalize();
+        name += _capitalize(element);
       }
     }
     var matches = RegExp(r'@(\w+)').allMatches(value);
@@ -130,14 +129,12 @@ String genClassFromKeys(Map<String, Map<String, String>>? keys) {
 ''';
 }
 
-extension on String {
-  String _capitalize() {
-    if (isEmpty) {
-      return this;
-    }
-
-    if (length == 1) return toUpperCase();
-
-    return "${this[0].toUpperCase()}${substring(1)}";
+String _capitalize(String value) {
+  if (value.isEmpty) {
+    return value;
   }
+
+  if (value.length == 1) return value.toUpperCase();
+
+  return "${value[0].toUpperCase()}${value.substring(1)}";
 }
