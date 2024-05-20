@@ -111,7 +111,10 @@ class AppLocalization {
     required String value,
     required String coins,
   }) =>
-      Translations.test4DialogDescription(value: value, coins: coins);
+      'test4.dialog.description'.tr.trParams({
+        'value': value,
+        'coins': coins,
+      });
 }
 ```
 
