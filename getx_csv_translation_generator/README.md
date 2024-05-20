@@ -77,6 +77,46 @@ return GetMaterialApp(
 );
 ```
 
+5. File generate 'translations.g.dart'
+
+The Dart section contains a Dart class named `AppLocalization` and a constant map named `$keys`. The `$keys` map represents a localization key-value mapping for different languages. It has two entries: one for the English language (`'en'`) and one for the Thai language (`'th'`). Each language entry contains multiple key-value pairs representing different translations.
+
+The `AppLocalization` class provides static getter methods for accessing the translations. For example, `AppLocalization.test` returns the translation for the key `'test'`. Similarly, `AppLocalization.test2` returns the translation for the key `'test2'`. The class also includes a static method named `test4DialogDescription` that takes two required parameters (`value` and `coins`) and returns a translation based on those parameters.
+
+Overall, this code represents a localization mechanism where translations for different languages are stored in a map, and the `AppLocalization` class provides convenient methods to access those translations.
+
+```dart
+
+const $keys = {
+  'en': {
+    'test': 'Te\nst',
+    'test2': 'Te,nst',
+    'test3': '"Tenst"',
+    'test4.dialog.title.makeText': '"Test Text, "',
+    'test4.dialog.description': '"(@value) make more money @coins "'
+  },
+  'th': {
+    'test': 'ทด\nสอบ',
+    'test2': 'ทด,สอบ',
+    'test3': '"ทดสอบ"',
+    'test4.dialog.title.makeText': '"ทดสอบ ข้อความ, "',
+    'test4.dialog.description': '"(@value) ทำเงินเพิ่มขึ้น @coins "'
+  }
+};
+
+class AppLocalization {
+  static String get test => Translations.test;
+  static String get test2 => Translations.test2;
+  static String get test3 => Translations.test3;
+  static String get test4DialogTitleMakeText => Translations.test4DialogTitleMakeText;
+  static String test4DialogDescription({
+    required String value,
+    required String coins,
+  }) =>
+      Translations.test4DialogDescription(value: value, coins: coins);
+}
+```
+
 ## Build Configuraion
 
 Aside from setting arguments on the associated annotation classes, you can also configure code generation by setting values in build.yaml.
@@ -91,3 +131,5 @@ targets:
           csv_path: ./translation.csv
           single_quote: true
 ```
+
+
