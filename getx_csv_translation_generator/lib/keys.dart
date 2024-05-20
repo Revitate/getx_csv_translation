@@ -80,3 +80,46 @@ String _uniformizeKey(String key) {
   key = key.trim().replaceAll('\n', '');
   return key;
 }
+
+String genClassFromKeys(Map<String, String> keysMap) {
+  String localization = '';
+  keysMap.forEach((key, value) {
+    List<String> keyName = key.split('.');
+    String name = '';
+    if (keyName.isNotEmpty) {
+      name = keyName.first;
+      keyName.removeAt(0);
+      for (var element in keyName) {
+        name += element.capitalize();
+      }
+    }
+    var matches = RegExp(r'@(\w+)').allMatches(value);
+    var results = matches.map((match) => match.group(1)).toList();
+
+    if (results.isEmpty) {
+      localization += '  static String get $name => \'$key\'.tr;\n';
+    } else {
+      String variable = '';
+      String params = '';
+      for (var result in results) {
+        variable += 'required String $result, ';
+        params += "'$result': '$result',";
+      }
+      localization +=
+          '''  static String $name({$variable}) => '$key'.tr.trParams(
+        {$params},
+      );\n''';
+    }
+  });
+  return '''
+  class AppLocalization{
+    $localization
+  }
+  ''';
+}
+
+extension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}
