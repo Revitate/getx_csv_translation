@@ -21,7 +21,7 @@ class DuplicateError extends Error {
   String toString() => '[Parse CSV Error] $message';
 }
 
-genKeysFromCSV(File csvFile) async {
+Future<Map<String, Map<String, String>>> genKeysFromCSV(File csvFile) async {
   final csvInput = csvFile.openRead();
   final csv = await csvInput
       .transform(utf8.decoder)
@@ -81,16 +81,8 @@ String _uniformizeKey(String key) {
   return key;
 }
 
-String genClassFromKeys(Map<String, Map<String, String>>? keys) {
-  if (keys == null) {
-    return '';
-  }
-
-  var keysMap = keys.isEmpty ? {} : keys.entries.first.value;
-
-  if (keysMap.isEmpty) {
-    return '';
-  }
+String genClassFromKeys(Map<String, Map<String, String>> keys) {
+  var keysMap = keys.isEmpty ? {} : keys.values.first;
 
   String localization = '';
   keysMap.forEach((key, value) {
