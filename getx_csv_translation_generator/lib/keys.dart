@@ -84,7 +84,7 @@ String _uniformizeKey(String key) {
 String genClassFromKeys(Map<String, String> keysMap) {
   String localization = '';
   keysMap.forEach((key, value) {
-    List<String> keyName = key.split('.');
+    List<String> keyName = key.split(RegExp(r'[.-_]'));
     String name = '';
     if (keyName.isNotEmpty) {
       name = keyName.first;
