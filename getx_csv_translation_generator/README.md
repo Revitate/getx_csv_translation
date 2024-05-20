@@ -77,9 +77,7 @@ return GetMaterialApp(
 );
 ```
 
-5. File generate 'translations.g.dart'
-
-The Dart section contains a Dart class named `AppLocalization` and a constant map named `$keys`. The `$keys` map represents a localization key-value mapping for different languages. It has two entries: one for the English language (`'en'`) and one for the Thai language (`'th'`). Each language entry contains multiple key-value pairs representing different translations.
+## How to use AppLocalization class
 
 The `AppLocalization` class provides static getter methods for accessing the translations. For example, `AppLocalization.test` returns the translation for the key `'test'`. Similarly, `AppLocalization.test2` returns the translation for the key `'test2'`. The class also includes a static method named `test4DialogDescription` that takes two required parameters (`value` and `coins`) and returns a translation based on those parameters.
 
@@ -116,6 +114,28 @@ class AppLocalization {
       Translations.test4DialogDescription(value: value, coins: coins);
 }
 ```
+
+### Example use class AppLocalization
+
+1. Import the AppLocalization class in the file where you want to use it:
+``` dart
+import 'path_to_your_file/translations.dart';
+```
+
+2. Use the static getters of the AppLocalization class to get the translated strings:
+``` dart
+String testTranslation = AppLocalization.test;
+String test2Translation = AppLocalization.test2;
+```
+
+3. If you have dynamic translations that require parameters, you can pass them as arguments:
+``` dart
+String dialogDescription = AppLocalization.test4DialogDescription(
+  value: '100',
+  coins: '50',
+);
+```
+This will return the translation for 'test4.dialog.description' with 'value' and 'coins' replaced by '100' and '50', respectively.
 
 ## Build Configuraion
 
