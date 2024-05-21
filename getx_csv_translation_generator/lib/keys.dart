@@ -80,3 +80,61 @@ String _uniformizeKey(String key) {
   key = key.trim().replaceAll('\n', '');
   return key;
 }
+
+String genClassFromKeys(Map<String, Map<String, String>>? keys) {
+  if (keys == null) {
+    return '';
+  }
+
+  var keysMap = keys.isEmpty ? {} : keys.entries.first.value;
+
+  if (keysMap.isEmpty) {
+    return '';
+  }
+
+  String localization = '';
+  keysMap.forEach((key, value) {
+    List<String> keyName = key.split(RegExp(r'[._-]'));
+    String name = '';
+    if (keyName.isNotEmpty) {
+      name = keyName.first;
+      keyName.removeAt(0);
+
+      for (var element in keyName) {
+        name += _capitalize(element);
+      }
+    }
+    var matches = RegExp(r'@(\w+)').allMatches(value);
+    var results = matches.map((match) => match.group(1)).toList();
+
+    if (results.isEmpty) {
+      localization += '  static String get $name => \'$key\'.tr;\n';
+    } else {
+      String variable = '';
+      String params = '';
+      for (var result in results) {
+        variable += 'required String $result,\n';
+        params += '\'$result\': $result,\n';
+      }
+      localization += '''  static String $name({
+    $variable
+  }) => '$key'.tr.trParams({
+    $params
+  });\n''';
+    }
+  });
+  return '''class AppLocalization {
+  $localization
+}
+''';
+}
+
+String _capitalize(String value) {
+  if (value.isEmpty) {
+    return value;
+  }
+
+  if (value.length == 1) return value.toUpperCase();
+
+  return '${value[0].toUpperCase()}${value.substring(1)}';
+}

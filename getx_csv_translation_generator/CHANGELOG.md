@@ -1,3 +1,6 @@
+## 0.0.7
+- Add class AppLocalization
+
 ## 0.0.6
 - Update dependcies
 
