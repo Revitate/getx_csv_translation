@@ -6,3 +6,4 @@ targets:
           # The default value for each is listed.
           csv_path: ./lib/core/translations.csv
           single_quote: true
+          localization_name: AppLocalization

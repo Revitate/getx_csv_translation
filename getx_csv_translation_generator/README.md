@@ -91,22 +91,25 @@ const $keys = {
     'test2': 'Te,nst',
     'test3': '"Tenst"',
     'test4.dialog.title.makeText': '"Test Text, "',
-    'test4.dialog.description': '"(@value) make more money @coins "'
+    'test4.dialog.description': '"(@value) make more money @coins "',
+    'test5.title': '"Head @value is @value "'
   },
   'th': {
     'test': 'ทด\nสอบ',
     'test2': 'ทด,สอบ',
     'test3': '"ทดสอบ"',
     'test4.dialog.title.makeText': '"ทดสอบ ข้อความ, "',
-    'test4.dialog.description': '"(@value) ทำเงินเพิ่มขึ้น @coins "'
+    'test4.dialog.description': '"(@value) ทำเงินเพิ่มขึ้น @coins "',
+    'test5.title': '"หัวข้อ @value เป็น @value "'
   }
 };
 
 class AppLocalization {
-  static String get test => Translations.test;
-  static String get test2 => Translations.test2;
-  static String get test3 => Translations.test3;
-  static String get test4DialogTitleMakeText => Translations.test4DialogTitleMakeText;
+  static String get test => 'test'.tr;
+  static String get test2 => 'test2'.tr;
+  static String get test3 => 'test3'.tr;
+  static String get test4DialogTitleMakeText =>
+      'test4.dialog.title.makeText'.tr;
   static String test4DialogDescription({
     required String value,
     required String coins,
@@ -114,6 +117,12 @@ class AppLocalization {
       'test4.dialog.description'.tr.trParams({
         'value': value,
         'coins': coins,
+      });
+  static String test5Title({
+    required String value,
+  }) =>
+      'test5.title'.tr.trParams({
+        'value': value,
       });
 }
 ```
@@ -153,6 +162,7 @@ targets:
           # The default value for each is listed.
           csv_path: ./translation.csv
           single_quote: true
+          localization_name: AppLocalization
 ```
 
 

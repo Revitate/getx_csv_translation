@@ -92,4 +92,5 @@ targets:
           # The default value for each is listed.
           csv_path: ./translation.csv
           single_quote: true
+          localization_name: AppLocalization
 ```
