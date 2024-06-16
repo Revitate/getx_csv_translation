@@ -81,7 +81,10 @@ String _uniformizeKey(String key) {
   return key;
 }
 
-String genClassFromKeys(Map<String, Map<String, String>> keys) {
+String genClassFromKeys(
+  Map<String, Map<String, String>> keys, {
+  String className = 'AppLocalization',
+}) {
   var keysMap = keys.isEmpty ? {} : keys.values.first;
 
   String localization = '';
@@ -97,7 +100,12 @@ String genClassFromKeys(Map<String, Map<String, String>> keys) {
       }
     }
     var matches = RegExp(r'@(\w+)').allMatches(value);
-    var results = matches.map((match) => match.group(1)).toList();
+    var results = matches.map((match) => match.group(1)).toSet().toList();
+
+    if (localization.contains(' $name ')) {
+      throw Exception(
+          '\n\n*** Generator found duplicate name `$name`, key `$key`. ***\n\n');
+    }
 
     if (results.isEmpty) {
       localization += '  static String get $name => \'$key\'.tr;\n';
@@ -108,14 +116,14 @@ String genClassFromKeys(Map<String, Map<String, String>> keys) {
         variable += 'required String $result,\n';
         params += '\'$result\': $result,\n';
       }
-      localization += '''  static String $name({
+      localization += '''  static String $name ({
     $variable
   }) => '$key'.tr.trParams({
     $params
   });\n''';
     }
   });
-  return '''class AppLocalization {
+  return '''class $className {
   $localization
 }
 ''';

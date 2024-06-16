@@ -1,3 +1,8 @@
+## 0.0.8
+- Check duplicate variable name in AppLocalization.
+- Add config localization_name for custom class name 'AppLocalization'.
+- Fix function params name duplicate.
+
 ## 0.0.7
 - Add class AppLocalization
 

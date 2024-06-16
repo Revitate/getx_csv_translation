@@ -16,3 +16,4 @@ builders:
     defaults:
       options:
         csv_path: ./translations.csv
+        localization_name: AppLocalization
